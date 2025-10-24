@@ -3,10 +3,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginData } from "../types/LoginSchema";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
+import Button from "../components/Button";
 
 export default function Login(){
     const {login} = useAuth();
+    const navigate = useNavigate();
 
     const [erro, setErro] = useState<string|null>(null);
 
@@ -43,14 +46,17 @@ export default function Login(){
                     {...register("senha")}
                 />
                 
-                <button 
+                <Button
+                    text="Entrar"
                     type="submit"
-                >
-                    Entrar
-                </button>
+                />
 
                 {erro && <span>{erro}</span>}
             </form>
+            <Button
+                text="Voltar para a pagina inicial"
+                onClick={() => navigate('/')}
+            />
         </div>
     )
 }

@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router-dom";
+
+import Button from "../components/Button";
+
 export default function Home() {
     const navigate = useNavigate();
 
@@ -16,9 +19,10 @@ export default function Home() {
                 Faça suas compras online agora mesmo, receba no conforto do seu lar e aproveite os benefícios exclusivos de ser morador.
             </p>
             
-            <button onClick={() => navigate('/login')}>
-                Ir para a pagina de login
-            </button>
+            <Button
+                onClick={() => navigate('/login')}
+                text="Ir para pagina de Login"
+            />
         </div>
     )
 }
