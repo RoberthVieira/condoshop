@@ -29,6 +29,8 @@ export default function Login(){
                 setErro(null)
             }, 1500)
         }
+
+        navigate('/dashboardlayout')
     }
 
     return(
