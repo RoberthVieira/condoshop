@@ -28,9 +28,9 @@ export default function AppRoutes(){
                 </ProtectedRoute>
             }>
                 <Route index element={<DashboardHome/>}/>
-                <Route path="/perfil" element={<Perfil/>}/>
-                <Route path="/produto" element={<Produtos/>}/>
-                <Route path="/produto/:id" element={<ProdutoDetalhe/>}/>
+                <Route path="perfil" element={<Perfil/>}/>
+                <Route path="produto" element={<Produtos/>}/>
+                <Route path="produto/:id" element={<ProdutoDetalhe/>}/>
             </Route>
             
             <Route path="*" element={<NotFound/>}/>
