@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import Footer from "../components/Footer";
 
 export default function Login(){
     const {login} = useAuth();
@@ -34,7 +35,8 @@ export default function Login(){
     }
 
     return(
-        <div>
+        <div className="">
+            <h1>CondoShop</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Input
                     type="text"
@@ -55,10 +57,13 @@ export default function Login(){
 
                 {erro && <span>{erro}</span>}
             </form>
-            <Button
-                text="Voltar para a pagina inicial"
-                onClick={() => navigate('/')}
-            />
+            <div>
+                <Button
+                    text="Voltar para a pagina inicial"
+                    onClick={() => navigate('/')}
+                />
+            </div>
+            <Footer/>
         </div>
     )
 }

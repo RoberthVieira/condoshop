@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import Button from "../../components/Button";
+import Footer from "../../components/Footer";
 
 export default function DashboardLayout() {
 
@@ -35,6 +36,8 @@ export default function DashboardLayout() {
             <main>
                 <Outlet/>
             </main>
+
+            <Footer/>
         </div>
     )
 }
