@@ -9,14 +9,14 @@ export function useBuscaProdutos(lista: ProdutoTypes[]){
     const parametroURL = searchParams.get('q') || "";
 
     const produtosFiltrados = lista.filter((prod) => 
-        prod.nome.toLowerCase().includes(parametroURL.toLowerCase())
+        prod.nome.toLowerCase().includes(produtoBuscado.toLowerCase())
     );
     
-    function atualizarBuscaNaUrl() {
-        if(produtoBuscado.trim() === ""){
+    function atualizarBuscaNaUrl(novoTermo: string) {
+        if(novoTermo.trim() === ""){
             setSearchParams({});
         } else {
-            setSearchParams({q: produtoBuscado})
+            setSearchParams({q: novoTermo})
         }
     }
 

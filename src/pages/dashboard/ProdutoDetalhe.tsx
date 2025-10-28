@@ -6,7 +6,7 @@ export default function ProdutoDetalhe(){
     const navigate = useNavigate();
     const location = useLocation();
     const {id} = useParams();
-    const produto = listaProdutos.find(p => p.id === Number(id));
+    const produto = listaProdutos.find(p => p.id === Number(id))
 
     return(
         <div>

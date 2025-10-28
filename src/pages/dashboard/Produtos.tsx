@@ -13,7 +13,7 @@ export default function Produtos() {
         setProdutoBuscado,
         produtosFiltrados,
         atualizarBuscaNaUrl
-    } = useBuscaProdutos(listaProdutos)
+    } = useBuscaProdutos(listaProdutos);
 
     return (
         <div>
@@ -28,20 +28,22 @@ export default function Produtos() {
                     Navegue pelos produtos disponíveis e aproveite a praticidade.
                 </p>
             </div>
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                atualizarBuscaNaUrl();
-            }}>
+
+            <div>
                 <Input
                     placeholder="Buscar produto..."
                     value={produtoBuscado}
-                    onChange={(e) => setProdutoBuscado(e.target.value)}
+                    onChange={(e) => {
+                        setProdutoBuscado(e.target.value)
+                        atualizarBuscaNaUrl(e.target.value)
+                    }}
                 />
                 <Button
-                    type="submit"
+                    type="button"
                     text="Buscar"
                 />
-            </form>
+            </div>
+
             <div>
                 {(produtoBuscado ? produtosFiltrados : listaProdutos).map((prod) => (
                     <CardProdutos
