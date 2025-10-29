@@ -1,9 +1,4 @@
-import { useNavigate } from "react-router-dom";
-
-import Button from "../components/Button";
-
 export default function Home() {
-    const navigate = useNavigate();
 
     return (
         <div className="flex flex-col justify-center mt-16 items-center bg-gray-50 text-center">
@@ -21,10 +16,6 @@ export default function Home() {
                 Faça suas compras online agora mesmo, receba no conforto do seu lar e aproveite os benefícios exclusivos de ser morador.
             </p>
             
-            <Button
-                onClick={() => navigate('/login')}
-                text="Ir para pagina de Login"
-            />
         </div>
     )
 }

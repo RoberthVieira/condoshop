@@ -35,34 +35,39 @@ export default function Login(){
     }
 
     return(
-        <div className="">
-            <h1>CondoShop</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Input
-                    type="text"
-                    placeholder="Usuário"
-                    {...register("user")}
-                />
-
-                <Input
-                    type="password"
-                    placeholder="Senha"
-                    {...register("senha")}
-                />
+        <div className="min-h-screen flex flex-col justify-between bg-gray-50">
+            <main className="flex flex-1 items-center justify-center px-4 sm:px-6 lg:px-8">
+                <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 sm:p-8 flex flex-col gap-6">
+                    <h1 className="text-6xl sm:text-5xl font-bold text-indigo-600 mb-8 sm:mb-4 text-center">
+                        CondoShop
+                    </h1>
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="flex flex-col gap-4"
+                    >
+                        <Input
+                            type="text"
+                            placeholder="Usuário"
+                            {...register("user")}
+                        />
+                        <Input
+                            type="password"
+                            placeholder="Senha"
+                            {...register("senha")}
+                        />
                 
-                <Button
-                    text="Entrar"
-                    type="submit"
-                />
-
-                {erro && <span>{erro}</span>}
-            </form>
-            <div>
-                <Button
-                    text="Voltar para a pagina inicial"
-                    onClick={() => navigate('/')}
-                />
-            </div>
+                        <Button
+                            text="Entrar"
+                            type="submit"
+                        />
+                        {erro && <span className="text-red-500 text-sm text-center">{erro}</span>}
+                        <Button
+                            text="Voltar para a pagina inicial"
+                            onClick={() => navigate('/')}
+                        />
+                    </form>
+                </div>
+            </main>
             <Footer/>
         </div>
     )

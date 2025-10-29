@@ -18,6 +18,9 @@ export default function NavBar() {
                     <Link to='/about' className="text-gray-700 hover:text-indigo-600 transition-colors duration-200">
                         Sobre o CondoShop
                     </Link>
+                    <Link to='/login' className="text-gray-700 hover:text-indigo-600 transition-colors duration-200">
+                        Login                    
+                    </Link>
                 </div>
 
                 <button
@@ -44,8 +47,14 @@ export default function NavBar() {
                     >
                         Sobre o CondoShop
                     </Link>
+                    <Link 
+                        to='/login' 
+                        className="text-gray-700 block py-2 hover:text-indigo-600 transition"
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Login
+                    </Link>
                 </div>
-
             </nav>
         </header>
     )
