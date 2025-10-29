@@ -1,7 +1,7 @@
 export default function Home() {
 
     return (
-        <div className="flex flex-col justify-center mt-16 items-center bg-gray-50 text-center">
+        <div className="flex flex-col justify-center mt-16 py-16 items-center bg-gray-50 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-indigo-700 mb-6">
                 Bem-vindo ao CondoShop!
             </h1>
