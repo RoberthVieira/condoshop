@@ -1,6 +1,6 @@
 export default function DashboardHome() {
     return (
-        <section className='flex flex-col items-center justify-center px-6 py-16 bg-gray-50 text-center md:text-left'>
+        <section className='flex flex-col items-center justify-center px-6 py-16 bg-gray-50 text-center'>
             <h1 className="text-4xl md:text-5xl font-bold text-indigo-700 mb-6">
                 Bem-vindo ao seu painel de compras CondoShop!
             </h1>

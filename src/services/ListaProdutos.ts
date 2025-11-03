@@ -69,5 +69,19 @@ export const listaProdutos: ProdutoTypes[] = [
     preco: 12.90,
     descricao: "Só assar! Pronto em 15 minutos.",
     categoria: "Congelados"
+  },
+  {
+    id: 11,
+    nome: "Pizza Congelada 4 Queijos",
+    preco: 22.90,
+    descricao: "Pizza pronta para assar, massa fina e crocante.",
+    categoria: "Congelados"
+  },
+  {
+    id: 12,
+    nome: "Suco Natural de Laranja 1L",
+    preco: 9.50,
+    descricao: "Suco 100% natural, sem conservantes.",
+    categoria: "Bebidas"
   }
 ];

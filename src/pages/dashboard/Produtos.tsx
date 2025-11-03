@@ -16,20 +16,22 @@ export default function Produtos() {
     } = useBuscaProdutos(listaProdutos);
 
     return (
-        <div>
-            <div>
-                <h1>
+        <div className="flex flex-col items-center justify-center px-6 py-10 max-w-6xl mx-auto">
+            <div 
+                className="text-center mb-10"
+            >
+                <h1 className="text-3xl font-bold text-blue-600 mb-3">
                     Compre sem sair de casa!
                 </h1>
-                <p>
+                <p className="text-gray-700 mb-1">
                     Aqui no CondoShop você encontra itens essenciais para o dia a dia com entrega rápida e exclusiva para moradores do condomínio.
                 </p>
-                <p>
+                <p className="text-gray-600">
                     Navegue pelos produtos disponíveis e aproveite a praticidade.
                 </p>
             </div>
 
-            <div>
+            <div className="flex flex-col sm:flex-row items-center gap-3 mb-10 w-full max-w-md">
                 <Input
                     placeholder="Buscar produto..."
                     value={produtoBuscado}
@@ -44,7 +46,9 @@ export default function Produtos() {
                 />
             </div>
 
-            <div>
+            <div
+                className="grid gap-8 w-full sm:grid-cols-2 lg:grid-cols-3"
+            >
                 {(produtoBuscado ? produtosFiltrados : listaProdutos).map((prod) => (
                     <CardProdutos
                         key={prod.id}
