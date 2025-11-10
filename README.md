@@ -1,73 +1,113 @@
-# React + TypeScript + Vite
+# 🏬 CondoShop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**CondoShop** é uma aplicação web fictícia de e-commerce desenvolvida com **React + TypeScript**. 
+O projeto foi criado com o objetivo de treinar conceitos fundamentais de **componentização**, **navegação entre rotas**, **hooks personalizados**, **validação de formulários com Zod**, **React Hook Form** e **estilização responsiva com TailwindCSS**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias utilizadas
 
-## React Compiler
+- ⚛️ **React (Vite + TypeScript)** — estrutura base do projeto  
+- 🧭 **React Router DOM** — gerenciamento de rotas e navegação  
+- 🎨 **TailwindCSS** — estilização moderna, responsiva e consistente  
+- 🧾 **React Hook Form** — gerenciamento de formulários  
+- ✅ **Zod** — validação de dados integrada aos formulários  
+- 🧠 **Hooks personalizados**:
+  - `useAuth`: gerencia autenticação e informações do usuário  
+  - `useBuscaProdutos`: gerencia a busca e filtragem de produtos 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🎯 Objetivo do projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+O **CondoShop** foi desenvolvido como uma **simulação de loja virtual**, com foco em **boas práticas de desenvolvimento front-end**.  
+Mais do que um simples layout, o projeto explora:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 🧩 Estruturação e organização de pastas e componentes;  
+- ♻️ Criação de **componentes reutilizáveis e estilizados**;  
+- 🧭 Implementação de **rotas dinâmicas** (ex: página de detalhes de produto);  
+- 🔐 **Autenticação simulada** com controle de sessão;  
+- ⚙️ Lógicas encapsuladas em **hooks personalizados**;  
+- 🧾 **Formulários tipados e validados** com React Hook Form + Zod.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📱 Responsividade
+
+O design foi construído com **TailwindCSS**, garantindo:
+
+- Layout fluido e adaptável a diferentes dispositivos;  
+- Espaçamentos e tipografias consistentes;  
+- Interface moderna tanto no **modo desktop** quanto **mobile**.
+
+---
+
+## 🧩 Estrutura de componentes
+
+Alguns dos principais componentes e páginas:
+
+| Tipo | Nome | Descrição |
+|------|------|------------|
+| 🧱 **Componente** | `NavBar` | Barra de navegação principal |
+| 🧱 **Componente** | `CardProdutos` | Exibe informações de cada produto |
+| 📄 **Página** | `ProdutoDetalhe` | Página de detalhes e compra |
+| 📄 **Página** | `Dashboard` | Painel principal de produtos |
+| 📄 **Página** | `Perfil` | Perfil do usuário autenticado |
+| 📄 **Página** | `Login` | Formulário com validação (Zod + React Hook Form) |
+
+---
+
+## 🧠 Conceitos praticados
+
+- ✅ React com TypeScript (tipagem e props seguras)  
+- 🔄 Composição e reutilização de componentes  
+- 🧠 Criação e uso de hooks personalizados  
+- 🧭 Navegação entre páginas com React Router DOM  
+- 🧾 Validação de formulários com Zod  
+- 🎨 Estilização e responsividade com TailwindCSS  
+- ⚡ Boas práticas de organização e legibilidade de código 
+
+---
+
+## 🧪 Próximos passos
+
+- 🔌 Implementar **integração com backend (API REST)**  
+- 🔐 Adicionar **persistência de autenticação** via contexto global  
+- 🧩 Criar **testes automatizados** com Jest + React Testing Library  
+- 🛒 Implementar **carrinho de compras** e **histórico de pedidos**
+
+---
+
+## ⚙️ Como executar o projeto
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Clone o repositório:
+git clone https://github.com/RoberthVieira/condoshop.git
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Acesse a pasta do projeto:
+cd condoshop
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Instale as dependências:
+npm install
+
+Execute o servidor de desenvolvimento
+npm run dev
+
 ```
+--- 
+
+## 🧾 Licença
+
+Este projeto foi desenvolvido apenas para fins de estudo e demonstração de habilidades técnicas.
+Sinta-se à vontade para explorar
+
+---
+
+## 👨‍💻 Autor
+
+Roberth Vieira
+💼 Desenvolvedor Front-End
+📧 roberthvieiracv@gmail.com
+🌐 linkedin.com/in/roberth-vieira-501490211/
+💻 github.com/RoberthVieira
