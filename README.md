@@ -106,8 +106,8 @@ Sinta-se à vontade para explorar
 
 ## 👨‍💻 Autor
 
-Roberth Vieira
-💼 Desenvolvedor Front-End
-📧 roberthvieiracv@gmail.com
-🌐 linkedin.com/in/roberth-vieira-501490211/
-💻 github.com/RoberthVieira
+- Roberth Vieira 
+- 💼 Desenvolvedor Front-End
+- 📧 roberthvieiracv@gmail.com
+- 🌐 linkedin.com/in/roberth-vieira-501490211/
+- 💻 github.com/RoberthVieira
