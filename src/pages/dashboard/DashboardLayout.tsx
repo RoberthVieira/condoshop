@@ -39,7 +39,7 @@ export default function DashboardLayout() {
                                 className="block text-gray-700 hover:text-indigo-600 transition"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Home
+                                Inicio
                             </Link>
             
                             <Link

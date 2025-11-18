@@ -14,12 +14,12 @@ export default function Perfil() {
                         <h1
                             className="text-3xl font-bold text-indigo-700 mb-4"
                         >
-                            Bem-vindo ao seu perfil {namaUser}
+                            Bem-vindo ao seu perfil, {namaUser}
                         </h1>
                         <p
                             className="text-gray-700 mb-6"
                         >
-                            Aqui você poderá acompanhar suas compras, atualizar informações e
+                            Aqui, você poderá acompanhar suas compras, atualizar informações e
                             gerenciar seu acesso ao CondoShop.
                         </p>
                     </>
@@ -29,7 +29,7 @@ export default function Perfil() {
                     </h1>
                 )}
                 <span className="text-gray-600">
-                    Você não possui prdoutos no seu historico de compras
+                    Você não possui prdoutos no seu histórico de compras
                 </span>
             </div>
         </div>

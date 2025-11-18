@@ -6,7 +6,7 @@ export default function DashboardHome() {
             </h1>
 
             <p className="text-gray-700 text-lg md:text-xl max-w-2xl mb-4">
-                Aqui você pode acessar sua loja de produtos, verificar informações do
+                Aqui você pode acessar a loja de produtos, verificar informações do
                 seu perfil e acompanhar tudo o que acontece no seu condomínio de forma
                 prática e segura.
             </p>

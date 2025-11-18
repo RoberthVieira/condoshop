@@ -62,7 +62,7 @@ export default function Login(){
                         />
                         {erro && <span className="text-red-500 text-sm text-center">{erro}</span>}
                         <Button
-                            text="Voltar para a pagina inicial"
+                            text="Voltar para a página inicial"
                             onClick={() => navigate('/')}
                         />
                     </form>

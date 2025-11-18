@@ -39,7 +39,7 @@ export default function ProdutoDetalhe(){
                         text="Comprar"
                     />
                     <Button
-                        text="Voltar para pagina de produtos"
+                        text="Voltar para página de produtos"
                         onClick={() => navigate(-1)}
                     />
                 </div>

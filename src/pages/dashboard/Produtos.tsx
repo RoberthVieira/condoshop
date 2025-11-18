@@ -24,7 +24,7 @@ export default function Produtos() {
                     Compre sem sair de casa!
                 </h1>
                 <p className="text-gray-700 mb-1">
-                    Aqui no CondoShop você encontra itens essenciais para o dia a dia com entrega rápida e exclusiva para moradores do condomínio.
+                    Aqui no CondoShop, você encontra itens essenciais para o dia a dia com entrega rápida e exclusiva para moradores do condomínio.
                 </p>
                 <p className="text-gray-600">
                     Navegue pelos produtos disponíveis e aproveite a praticidade.
