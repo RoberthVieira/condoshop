@@ -21,14 +21,16 @@ export default function Login(){
         resolver: zodResolver(loginSchema)
     })
 
-     function onSubmit(data: LoginData){
-        const sucesso = login(data.user, data.senha);
+     async function onSubmit(data: LoginData){
+        const { email, senha } = data
+        const sucesso = await login(email, senha);
         if(!sucesso){
             setErro("Usuario ou senha estão incoretos!")
 
             setTimeout(() => {
                 setErro(null)
             }, 1500)
+            return
         }
 
         navigate('/dashboardlayout')
@@ -48,7 +50,7 @@ export default function Login(){
                         <Input
                             type="text"
                             placeholder="Usuário"
-                            {...register("user")}
+                            {...register("email")}
                         />
                         <Input
                             type="password"

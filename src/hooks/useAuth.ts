@@ -1,36 +1,35 @@
 import { useNavigate } from "react-router-dom";
-import { users } from "../services/users";
+import { loginApi } from "../services/api";
 
 export function useAuth(){
     const navigate =  useNavigate();
 
-    function login(name: string, password: string): boolean {
-        const user = users.find(  //retorna o primeiro item que atende as condições da linha abaixo
-            (user) => user.name === name && user.password === password 
-        )
+    async function login(email: string, senha: string): Promise<boolean> {
+        try{
+            const data = await loginApi(email, senha)
 
-        if(user){
-            localStorage.setItem("auth", "true");
-            localStorage.setItem("userName", user.name)
+            localStorage.setItem('token', data.token)
+            localStorage.setItem('morador', JSON.stringify(data.morador))
             return true
+        } catch {
+            return false
         }
-
-        return false
     }
 
     function logout(){
-        localStorage.removeItem("auth");
-        localStorage.removeItem("userName");
+        localStorage.removeItem("token");
+        localStorage.removeItem("morador");
         navigate('/login');
     };
 
     function isAuthenticated(): boolean  {
-        return localStorage.getItem("auth") === "true"
+        return !!localStorage.getItem("token")
     }
 
-    function getUserName(): string|null{
-        return localStorage.getItem("userName")
+    function getMorador() {
+        const morador = localStorage.getItem('morador');
+        return morador ? JSON.parse(morador) : null
     }
 
-    return{login, logout, isAuthenticated, getUserName};
+    return{login, logout, isAuthenticated, getMorador};
 }
