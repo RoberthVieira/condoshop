@@ -1,5 +1,3 @@
-import { listaProdutos } from "../../services/ListaProdutos";
-
 import CardProdutos from "../../components/CardProduto";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -8,12 +6,7 @@ import { useBuscaProdutos } from "../../hooks/useBuscaProdutos";
 
 export default function Produtos() {
 
-    const {
-        produtoBuscado,
-        setProdutoBuscado,
-        produtosFiltrados,
-        atualizarBuscaNaUrl
-    } = useBuscaProdutos(listaProdutos);
+    const {produtos, busca, setBusca} = useBuscaProdutos()
 
     return (
         <div className="flex flex-col items-center justify-center px-6 py-10 max-w-6xl mx-auto">
@@ -34,10 +27,9 @@ export default function Produtos() {
             <div className="flex flex-col sm:flex-row items-center gap-3 mb-10 w-full max-w-md">
                 <Input
                     placeholder="Buscar produto..."
-                    value={produtoBuscado}
+                    value={busca}
                     onChange={(e) => {
-                        setProdutoBuscado(e.target.value)
-                        atualizarBuscaNaUrl(e.target.value)
+                        setBusca(e.target.value)
                     }}
                 />
                 <Button
@@ -49,14 +41,15 @@ export default function Produtos() {
             <div
                 className="grid gap-8 w-full sm:grid-cols-2 lg:grid-cols-3"
             >
-                {(produtoBuscado ? produtosFiltrados : listaProdutos).map((prod) => (
+                {produtos.map((prod) => (
                     <CardProdutos
                         key={prod.id}
                         id={prod.id}
                         nome={prod.nome}
                         descricao={prod.descricao}
                         preco={prod.preco}
-                        categoria={prod.categoria}
+                        categoriaId={Number(prod.categoriaId)}
+                        imagem={prod.imagem}
                     />
                 ))}
             </div>

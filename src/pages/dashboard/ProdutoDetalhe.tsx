@@ -1,12 +1,21 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { listaProdutos } from "../../services/ListaProdutos";
+import { useState, useEffect } from "react";
 import Button from "../../components/Button";
+import { getProdutoById } from "../../services/api";
+import type { ProdutoTypes } from "../../types/ProdutoTypes";
 
 export default function ProdutoDetalhe(){
+    const  [ produto, setProduto ] = useState<ProdutoTypes | null>(null)
     const navigate = useNavigate();
     const location = useLocation();
     const {id} = useParams();
-    const produto = listaProdutos.find(p => p.id === Number(id))
+
+    useEffect(() => {
+        getProdutoById(Number(id)).then(data => {
+            setProduto(data)
+        })
+    }, [])
+    
 
     if(!produto){
         return(

@@ -3,5 +3,8 @@ export interface ProdutoTypes {
     nome: string;
     preco: number;
     descricao: string;
-    categoria: string;
+    categoriaId: string;
+    estoque: number;
+    imagem?: string;
+    condomminioId: number
 }
