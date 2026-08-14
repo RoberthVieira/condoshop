@@ -14,6 +14,7 @@ export async function loginApi(email: string, senha: string) {
     return response.json() //retorna: { token, morador: { id, nome, email, role, condominio } }
 }
 
+
 export async function getProduto(busca?: string) {
     const token = localStorage.getItem('token')
 
@@ -35,6 +36,7 @@ export async function getProduto(busca?: string) {
     return data.data
 }
 
+
 export async function getProdutoById(id:number) {
     const token = localStorage.getItem('token')
 
@@ -50,4 +52,24 @@ export async function getProdutoById(id:number) {
 
     const data = await response.json()
     return data.data
+}
+
+
+export async function criarPedido(itens: { produtoId: number, quantidade: number} []) {
+    const token = localStorage.getItem('token')
+
+    const response = await fetch(`${API_URL}/pedidos`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ itens })
+    });
+
+    if(!response.ok){
+        throw new Error('Erro ao criar pedido')
+    }
+
+    return response.json
 }

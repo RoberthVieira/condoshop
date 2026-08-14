@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { useCarrinho } from "../hooks/useCarrinho";
 import Button from "./Button";
+import BtnCarrinho from "./BtnCarrinho";
 
 interface CardProdutosProps {
     id: number
@@ -8,10 +10,11 @@ interface CardProdutosProps {
     descricao: string
     categoriaId: number
     imagem?: string
-}
+} 
 
 export default function CardProdutos({id, nome, preco, descricao, categoriaId, imagem}: CardProdutosProps){
     const navigate = useNavigate();
+    const { adicionarItem } = useCarrinho();
     return(
         <div 
             key={id}
@@ -45,10 +48,18 @@ export default function CardProdutos({id, nome, preco, descricao, categoriaId, i
                     })}
                 </p>
             </div>
-            <div className="px-5 pb-4">
+            <div className="px-5 pb-4 flex gap-2">
                 <Button
                     text="Ver mais detalhes/comprar"
                     onClick={() => navigate(`${id}`)} //ja esta dentro de "produto" por isso basta navegar pelo id
+                />
+                <BtnCarrinho
+                    onClick={() => adicionarItem({
+                        produtoId: id,
+                        nome,
+                        preco,
+                        quantidade: 1
+                    })}
                 />
             </div>
         </div>

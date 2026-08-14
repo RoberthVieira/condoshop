@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Button from "../../components/Button";
 import { getProdutoById } from "../../services/api";
 import type { ProdutoTypes } from "../../types/ProdutoTypes";
+import { useCarrinho } from "../../hooks/useCarrinho";
 
 export default function ProdutoDetalhe(){
     const  [ produto, setProduto ] = useState<ProdutoTypes | null>(null)
@@ -27,6 +28,8 @@ export default function ProdutoDetalhe(){
         )
     }
 
+    const { adicionarItem } = useCarrinho();
+
     return(
         <div className="min-h-[calc(100vh-110px)] bg-gray-50 flex flex-col items-center px-4 py-10">
             <div className="max-w-3xl w-full bg-white shadow-md rounded-2xl p-8">
@@ -46,6 +49,15 @@ export default function ProdutoDetalhe(){
                 <div className="flex flex-wrap gap-4">
                     <Button
                         text="Comprar"
+                        onClick={()  => {
+                            adicionarItem({
+                                produtoId: produto.id,
+                                nome: produto.nome,
+                                preco: produto.preco,
+                                quantidade: 1
+                            })
+                            navigate('/carrinho')
+                        }}
                     />
                     <Button
                         text="Voltar para página de produtos"
