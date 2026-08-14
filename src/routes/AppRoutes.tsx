@@ -11,6 +11,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import Perfil from "../pages/dashboard/Perfil";
 import Produtos from "../pages/dashboard/Produtos";
 import ProdutoDetalhe from "../pages/dashboard/ProdutoDetalhe";
+import Carrinho from "../pages/dashboard/Carrinho";
 
 export default function AppRoutes(){
     return(
@@ -31,6 +32,7 @@ export default function AppRoutes(){
                 <Route path="perfil" element={<Perfil/>}/>
                 <Route path="produto" element={<Produtos/>}/>
                 <Route path="produto/:id" element={<ProdutoDetalhe/>}/>
+                <Route path="carrinho" element={<Carrinho/>}/>
             </Route>
             
             <Route path="*" element={<NotFound/>}/>

@@ -71,5 +71,5 @@ export async function criarPedido(itens: { produtoId: number, quantidade: number
         throw new Error('Erro ao criar pedido')
     }
 
-    return response.json
+    return response.json()
 }

@@ -54,12 +54,15 @@ export default function CardProdutos({id, nome, preco, descricao, categoriaId, i
                     onClick={() => navigate(`${id}`)} //ja esta dentro de "produto" por isso basta navegar pelo id
                 />
                 <BtnCarrinho
-                    onClick={() => adicionarItem({
-                        produtoId: id,
-                        nome,
-                        preco,
-                        quantidade: 1
-                    })}
+                    onClick={() => {
+                        adicionarItem({
+                            produtoId: id,
+                            nome,
+                            preco,
+                            quantidade: 1                            
+                        })
+                        navigate('carrinho') // redireciona pro carrinho
+                    }}
                 />
             </div>
         </div>
