@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useCarrinho } from "../hooks/useCarrinho";
+import { useCarrinho } from '../context/CarrinhoContext'
 import Button from "./Button";
 import BtnCarrinho from "./BtnCarrinho";
 
@@ -61,7 +61,6 @@ export default function CardProdutos({id, nome, preco, descricao, categoriaId, i
                             preco,
                             quantidade: 1                            
                         })
-                        navigate('/dashboardlayout/carrinho')
                     }}
                 />
             </div>

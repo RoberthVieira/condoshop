@@ -12,6 +12,7 @@ import Perfil from "../pages/dashboard/Perfil";
 import Produtos from "../pages/dashboard/Produtos";
 import ProdutoDetalhe from "../pages/dashboard/ProdutoDetalhe";
 import Carrinho from "../pages/dashboard/Carrinho";
+import { CarrinhoProvider } from "../context/CarrinhoContext";
 
 export default function AppRoutes(){
     return(
@@ -25,7 +26,9 @@ export default function AppRoutes(){
 
             <Route path="/dashboardlayout" element={
                 <ProtectedRoute>
-                    <DashboardLayout/>
+                    <CarrinhoProvider>
+                        <DashboardLayout/>
+                    </CarrinhoProvider>
                 </ProtectedRoute>
             }>
                 <Route index element={<DashboardHome/>}/>
