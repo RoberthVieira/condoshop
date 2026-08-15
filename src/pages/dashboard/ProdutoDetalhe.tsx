@@ -17,6 +17,7 @@ export default function ProdutoDetalhe(){
         })
     }, [])
     
+    const { adicionarItem } = useCarrinho();
 
     if(!produto){
         return(
@@ -27,8 +28,6 @@ export default function ProdutoDetalhe(){
             </div>
         )
     }
-
-    const { adicionarItem } = useCarrinho();
 
     return(
         <div className="min-h-[calc(100vh-110px)] bg-gray-50 flex flex-col items-center px-4 py-10">
@@ -56,7 +55,7 @@ export default function ProdutoDetalhe(){
                                 preco: produto.preco,
                                 quantidade: 1
                             })
-                            navigate('/carrinho')
+                            navigate('/dashboardlayout/carrinho')
                         }}
                     />
                     <Button

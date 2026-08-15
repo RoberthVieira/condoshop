@@ -1,5 +1,4 @@
 import { useCarrinho } from "../../hooks/useCarrinho";
-import { useNavigate } from "react-router-dom";;
 import { criarPedido } from "../../services/api";
 import Button from "../../components/Button";
 
@@ -10,8 +9,6 @@ export default function Carrinho() {
     const total  = itens.reduce((acumulador, item) => {
         return acumulador + (item.preco * item.quantidade)
     }, 0)
-
-    const navigate = useNavigate();
 
     async function finalizarCompra() {
         const data = await criarPedido(

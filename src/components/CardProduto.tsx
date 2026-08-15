@@ -61,7 +61,7 @@ export default function CardProdutos({id, nome, preco, descricao, categoriaId, i
                             preco,
                             quantidade: 1                            
                         })
-                        navigate('carrinho') // redireciona pro carrinho
+                        navigate('/dashboardlayout/carrinho')
                     }}
                 />
             </div>
