@@ -22,18 +22,20 @@ export default function Login(){
     })
 
      async function onSubmit(data: LoginData){
-        const { email, senha } = data
-        const sucesso = await login(email, senha);
-        if(!sucesso){
-            setErro("Usuario ou senha estão incoretos!")
-
-            setTimeout(() => {
-                setErro(null)
-            }, 1500)
+        const sucesso = await login(data.email, data.senha)
+        if(!sucesso) {
+            setErro("Email ou senha incorretos!")
+            setTimeout(() => setErro(null), 1500)
             return
         }
 
-        navigate('/dashboardlayout')
+        const morador = JSON.parse(localStorage.getItem('morador') || '{}')
+
+        if(morador.role === 'admin') {
+            navigate('/admin')
+        } else {
+            navigate('/dashboardlayout')
+        }
     }
 
     return(

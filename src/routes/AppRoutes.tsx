@@ -12,6 +12,9 @@ import Perfil from "../pages/dashboard/Perfil";
 import Produtos from "../pages/dashboard/Produtos";
 import ProdutoDetalhe from "../pages/dashboard/ProdutoDetalhe";
 import Carrinho from "../pages/dashboard/Carrinho";
+import AdminRoute from "../components/AdminRoute";
+import AdminLayout from "../pages/dashboard/admin/AdminLayout";
+import AdminDashboard from "../pages/dashboard/admin/AdminDashboard";
 import { CarrinhoProvider } from "../context/CarrinhoContext";
 
 export default function AppRoutes(){
@@ -36,6 +39,16 @@ export default function AppRoutes(){
                 <Route path="produto" element={<Produtos/>}/>
                 <Route path="produto/:id" element={<ProdutoDetalhe/>}/>
                 <Route path="carrinho" element={<Carrinho/>}/>
+            </Route>
+
+            <Route path="/admin" element={
+                <AdminRoute>
+                    <AdminLayout/>
+                </AdminRoute>
+            }>
+                <Route index element={<AdminDashboard/>}/>
+                <Route path="produtos" element={<AdminProdutos/>}/>    // ← adiciona
+                <Route path="moradores" element={<AdminMoradores/>}/> 
             </Route>
             
             <Route path="*" element={<NotFound/>}/>

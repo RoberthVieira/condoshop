@@ -73,3 +73,20 @@ export async function criarPedido(itens: { produtoId: number, quantidade: number
 
     return response.json()
 }
+
+export async function getDashboard() {
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(`${API_URL}/dashboard`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+
+    if(!response.ok){
+        throw new Error('Erro ao buscar dashboard')
+    }
+
+    const data = await response.json()
+    return data.data
+}
