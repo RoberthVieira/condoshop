@@ -15,6 +15,7 @@ import Carrinho from "../pages/dashboard/Carrinho";
 import AdminRoute from "../components/AdminRoute";
 import AdminLayout from "../pages/dashboard/admin/AdminLayout";
 import AdminDashboard from "../pages/dashboard/admin/AdminDashboard";
+import AdminMoradores from "../pages/dashboard/admin/AdminMoradores";
 import { CarrinhoProvider } from "../context/CarrinhoContext";
 
 export default function AppRoutes(){
@@ -47,7 +48,6 @@ export default function AppRoutes(){
                 </AdminRoute>
             }>
                 <Route index element={<AdminDashboard/>}/>
-                <Route path="produtos" element={<AdminProdutos/>}/>    // ← adiciona
                 <Route path="moradores" element={<AdminMoradores/>}/> 
             </Route>
             

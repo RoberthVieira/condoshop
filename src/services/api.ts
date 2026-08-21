@@ -90,3 +90,69 @@ export async function getDashboard() {
     const data = await response.json()
     return data.data
 }
+
+//PAINEL ADMIN
+export async function getMoradores() {
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(`${API_URL}/moradores`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if(!response.ok) throw new Error('Erro ao buscar moradores');
+
+    const data = await response.json()
+    return data.data
+}
+
+export async function deletarMorador(id: number) {
+    const token = localStorage.getItem('token')
+
+    const response = await fetch(`${API_URL}/moradores/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if(!response.ok) throw new Error('Erro ao deletar morador')
+}
+
+export async function criarMorador(dados: {
+    nome: string
+    email: string
+    senha: string
+    condominioId: number
+    role: string
+}) {
+    const token = localStorage.getItem('token')
+    const response = await fetch(`${API_URL}/auth/registro`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(dados)
+    })
+    
+    if(!response.ok) throw new Error('Erro ao criar morador')
+    
+    return response.json();
+}
+
+export async function atualizarMorador(id: number, dados: Partial<{
+    nome: string
+    email: string
+    senha: string
+}>) {
+    const token = localStorage.getItem('token')
+    const response = await fetch(`${API_URL}/moradores/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(dados)
+    })
+
+    if(!response.ok) throw new Error('Erro ao atualizar morador')
+    return response.json()
+}
