@@ -91,7 +91,7 @@ export async function getDashboard() {
     return data.data
 }
 
-//PAINEL ADMIN
+//PAINEL ADMIN - MORADORES
 export async function getMoradores() {
     const token = localStorage.getItem('token');
 
@@ -155,4 +155,73 @@ export async function atualizarMorador(id: number, dados: Partial<{
 
     if(!response.ok) throw new Error('Erro ao atualizar morador')
     return response.json()
+}
+
+//PAINEL ADMIN - PRODUTOS
+export async function getProdutosAdmin() {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/produto`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+    if(!response.ok) throw new Error('Erro ao busscar produtos')
+
+    const data = await response.json()
+    return data.data
+}
+
+export async function criarProdutos(dados: {
+    nome: string
+    descricao: string
+    preco: number
+    estoque: number
+    categoriaId: number
+    imagem?: string
+}) {
+    const token = localStorage.getItem('token')
+     const response = await fetch(`${API_URL}/produtos`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(dados)
+    })
+
+    if(!response.ok){
+        throw new Error('Erro ao criar produto')
+    }
+
+    return response.json()
+}
+
+export async function atualizarProduto(id: number, dados: Partial<{
+    nome: string
+    descricao: string
+    preco: number
+    estoque: number    
+}>) {
+    const token = localStorage.getItem('token')
+    const response = await fetch(`${API_URL}/produtos/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(dados)
+    })   
+    
+    if(!response.ok){
+        throw new Error('Erro ao atualizar produto')
+    }
+
+    return response.json()
+}
+
+export async function deletarProduto(id: number) {
+    const token = localStorage.getItem('token')
+    const response = await fetch(`${API_URL}/produtos/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+    if(!response.ok) throw new Error('Erro ao deletar produto')
 }

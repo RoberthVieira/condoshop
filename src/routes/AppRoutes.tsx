@@ -16,6 +16,7 @@ import AdminRoute from "../components/AdminRoute";
 import AdminLayout from "../pages/dashboard/admin/AdminLayout";
 import AdminDashboard from "../pages/dashboard/admin/AdminDashboard";
 import AdminMoradores from "../pages/dashboard/admin/AdminMoradores";
+import AdminProdutos from "../pages/dashboard/admin/AdminProdutos";
 import { CarrinhoProvider } from "../context/CarrinhoContext";
 
 export default function AppRoutes(){
@@ -48,7 +49,8 @@ export default function AppRoutes(){
                 </AdminRoute>
             }>
                 <Route index element={<AdminDashboard/>}/>
-                <Route path="moradores" element={<AdminMoradores/>}/> 
+                <Route path="moradores" element={<AdminMoradores/>}/>
+                <Route path="produtos" element={<AdminProdutos/>}/>
             </Route>
             
             <Route path="*" element={<NotFound/>}/>
