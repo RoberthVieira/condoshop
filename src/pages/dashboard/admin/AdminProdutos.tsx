@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getProduto, atualizarProduto, criarProdutos, deletarProduto } from "../../../services/api";
+import { atualizarProduto, criarProdutos, deletarProduto, getProdutosAdmin, reativarProduto } from "../../../services/api";
+import Button from "../../../components/Button";
 
 interface Produto {
     id: number
@@ -9,6 +10,7 @@ interface Produto {
     estoque: number
     categoriaId: number
     imagem?: string
+    ativo: boolean
 }
 
 export default function AdminProdutos() {
@@ -16,13 +18,17 @@ export default function AdminProdutos() {
     const [isLoading, setIsLoading] = useState(true);
     const [produtoEdit, setProdutoEdit] = useState<Produto | null>(null);
     const [mostrarForms, setMostrarForms] = useState(false);
+    const [mostrarInativos, setMostrarInativos] = useState(false)
 
     useEffect(() => {
-        getProduto().then(data => {
-            setProdutos(data)
+        getProdutosAdmin(undefined, mostrarInativos).then(data => {
+            const filtrado = mostrarInativos
+                ? data
+                : data.filter((p: any) => p.ativo === true)
+            setProdutos(filtrado)
             setIsLoading(false)
         })
-    }, [])
+    }, [mostrarInativos])
 
     if(isLoading === true){
         return (
@@ -45,6 +51,16 @@ export default function AdminProdutos() {
                         </button>
                     </div>               
                 </div>
+                <div className="mb-8 flex gap-2">
+                    <Button
+                        text="Produtos ativos"
+                        onClick={() => setMostrarInativos(false)}
+                    />
+                    <Button
+                        text="Produtos inativos"
+                        onClick={() => setMostrarInativos(true)}
+                    />
+                </div>
                 <div className="bg-white rounded-xl shadow-sm p-5 mb-6">
                     <table className="w-full text-sm">
                         <thead>
@@ -64,16 +80,37 @@ export default function AdminProdutos() {
                                     </td>
                                     <td className="py-3 text-gray-500">{produto.estoque}</td>
                                     <td className="py-3 flex gap-2">
-                                        <button onClick={() => {setProdutoEdit(produto); setMostrarForms(true)}}
-                                            className="text-indigo-500 hover:text-indigo-700 transition text-lg"
-                                        >
-                                            ✏️
-                                        </button>
-                                        <button onClick={() => {deletarProduto(produto.id)}}
-                                            className="text-red-400 hover:text-red-600 transition text-lg"
-                                        >
-                                            🗑️
-                                        </button>
+                                        {mostrarInativos ? (
+                                            <button
+                                                onClick={async() => {
+                                                    await reativarProduto(produto.id)
+                                                    setProdutos(produtos.filter(p =>  p.id !== produto.id ))
+                                                }}
+                                                className="text-green-500 hover:text-green-700 transition text-lg"
+                                            >
+                                                ✅
+                                            </button>
+                                        ): (
+                                            <>
+                                                <button onClick={() => {setProdutoEdit(produto); setMostrarForms(true)}}
+                                                    className="text-indigo-500 hover:text-indigo-700 transition text-lg"
+                                                >
+                                                    ✏️
+                                                </button>
+                                                <button onClick={async() => {
+                                                    const confirmacao = confirm(`Tem certeza que deseja remover "${produto.nome}"?`)
+                                                    if(!confirmacao){
+                                                        return
+                                                    }
+                                                    await deletarProduto(produto.id)
+                                                    setProdutos(produtos.filter(p => produto.id  !== p.id))
+                                                }}
+                                                    className="text-red-400 hover:text-red-600 transition text-lg"
+                                                >
+                                                    🗑️
+                                                </button>
+                                            </>
+                                        )}
                                     </td>
                                 </tr>
                             ))}
@@ -107,7 +144,7 @@ export default function AdminProdutos() {
 
                                     setMostrarForms(false)
                                     setProdutoEdit(null)
-                                    const data = await getProduto()
+                                    const data = await getProdutosAdmin()
                                     setProdutos(data)
                                 }} className="flex flex-col gap-4">
                                     <input 

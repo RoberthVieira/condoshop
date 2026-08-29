@@ -158,18 +158,28 @@ export async function atualizarMorador(id: number, dados: Partial<{
 }
 
 //PAINEL ADMIN - PRODUTOS
-export async function getProdutosAdmin() {
+export async function getProdutosAdmin(busca?: string, apenasInativos?: boolean) {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${API_URL}/produto`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+    const partes: string[] = []
+
+    if(busca) partes.push(`busca=${busca}`)
+    if(apenasInativos) partes.push(`apenasInativos=true`)
+    
+    const query = partes.length > 0 ? `?${partes.join('&')}` : ''
+    const url = `${API_URL}/produtos${query}`
+
+    const response = await  fetch(url, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
     })
-    if(!response.ok) throw new Error('Erro ao busscar produtos')
+    if(!response.ok) throw new Error('Erro ao buscar produtos')
 
     const data = await response.json()
     return data.data
 }
 
-export async function criarProdutos(dados: {
+export async function criarProdutos(dados: {   
     nome: string
     descricao: string
     preco: number
@@ -224,4 +234,14 @@ export async function deletarProduto(id: number) {
         headers: { 'Authorization': `Bearer ${token}` }
     })
     if(!response.ok) throw new Error('Erro ao deletar produto')
+}
+
+export async function reativarProduto(id: number) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/produtos/${id}`, {
+        method: 'PATCH',
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+
+    if(!response.ok) throw new Error('Erro ao reativar produto')
 }

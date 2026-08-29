@@ -73,7 +73,14 @@ export default function AdminMoradores() {
                                         >
                                             ✏️
                                         </button>
-                                        <button onClick={() => {deletarMorador(morador.id)}}
+                                        <button onClick={async() => {
+                                            const confirmacao = confirm(`Tem certeza que deseja remover "${morador.nome}"?`)
+                                            if(!confirmacao){
+                                                return
+                                            }
+                                            await deletarMorador(morador.id)
+                                            setMoradores(moradores.filter(m =>  morador.id !== m.id))
+                                        }}
                                         className="text-red-400 hover:text-red-600 transition text-lg"
                                         >
                                             🗑️
