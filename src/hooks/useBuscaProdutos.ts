@@ -1,30 +1,16 @@
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getProduto } from "../services/api";
 import type { ProdutoTypes } from "../types/ProdutoTypes";
 
-export function useBuscaProdutos(lista: ProdutoTypes[]){
-    const [produtoBuscado, setProdutoBuscado] = useState<string>("");
+export function useBuscaProdutos() {
+    const [produtos, setProduto] = useState<ProdutoTypes[]>([]);
+    const [busca, setBusca] = useState('')
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const parametroURL = searchParams.get('q') || "";
+    useEffect(() => {
+        getProduto(busca).then(data => {
+            setProduto(data)
+        })
+    }, [busca]);
 
-    const produtosFiltrados = lista.filter((prod) => 
-        prod.nome.toLowerCase().includes(produtoBuscado.toLowerCase())
-    );
-    
-    function atualizarBuscaNaUrl(novoTermo: string) {
-        if(novoTermo.trim() === ""){
-            setSearchParams({});
-        } else {
-            setSearchParams({q: novoTermo})
-        }
-    }
-
-    return {
-    produtoBuscado,
-    setProdutoBuscado,
-    parametroURL,
-    produtosFiltrados,
-    atualizarBuscaNaUrl
-  };
+    return { produtos, busca, setBusca }
 }

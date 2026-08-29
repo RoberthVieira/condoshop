@@ -21,17 +21,21 @@ export default function Login(){
         resolver: zodResolver(loginSchema)
     })
 
-     function onSubmit(data: LoginData){
-        const sucesso = login(data.user, data.senha);
-        if(!sucesso){
-            setErro("Usuario ou senha estão incoretos!")
-
-            setTimeout(() => {
-                setErro(null)
-            }, 1500)
+     async function onSubmit(data: LoginData){
+        const sucesso = await login(data.email, data.senha)
+        if(!sucesso) {
+            setErro("Email ou senha incorretos!")
+            setTimeout(() => setErro(null), 1500)
+            return
         }
 
-        navigate('/dashboardlayout')
+        const morador = JSON.parse(localStorage.getItem('morador') || '{}')
+
+        if(morador.role === 'admin') {
+            navigate('/admin')
+        } else {
+            navigate('/dashboardlayout')
+        }
     }
 
     return(
@@ -48,7 +52,7 @@ export default function Login(){
                         <Input
                             type="text"
                             placeholder="Usuário"
-                            {...register("user")}
+                            {...register("email")}
                         />
                         <Input
                             type="password"

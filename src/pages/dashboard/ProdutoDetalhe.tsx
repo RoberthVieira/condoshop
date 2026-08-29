@@ -1,12 +1,23 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { listaProdutos } from "../../services/ListaProdutos";
+import { useState, useEffect } from "react";
 import Button from "../../components/Button";
+import { getProdutoById } from "../../services/api";
+import type { ProdutoTypes } from "../../types/ProdutoTypes";
+import { useCarrinho } from "../../context/CarrinhoContext";
 
 export default function ProdutoDetalhe(){
+    const  [ produto, setProduto ] = useState<ProdutoTypes | null>(null)
     const navigate = useNavigate();
     const location = useLocation();
     const {id} = useParams();
-    const produto = listaProdutos.find(p => p.id === Number(id))
+
+    useEffect(() => {
+        getProdutoById(Number(id)).then(data => {
+            setProduto(data)
+        })
+    }, [])
+    
+    const { adicionarItem } = useCarrinho();
 
     if(!produto){
         return(
@@ -36,7 +47,15 @@ export default function ProdutoDetalhe(){
                 </div>
                 <div className="flex flex-wrap gap-4">
                     <Button
-                        text="Comprar"
+                        text="Adicionar ao Carrinho"
+                        onClick={()  => {
+                            adicionarItem({
+                                produtoId: produto.id,
+                                nome: produto.nome,
+                                preco: produto.preco,
+                                quantidade: 1
+                            })
+                        }}
                     />
                     <Button
                         text="Voltar para página de produtos"
