@@ -89,6 +89,18 @@ export async function criarPedido(itens: { produtoId: number, quantidade: number
     return response.json()
 }
 
+export async function getPedidosMorador(moradorId: number) {
+    const token = localStorage.getItem('token')
+    const response = await fetch(`${API_URL}/pedidos/morador/${moradorId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+
+    if(!response.ok) throw new Error('Erro ao buscar pedidos')
+
+    const data = await response.json()
+    return data.pedidos
+}
+
 export async function getDashboard() {
     const token = localStorage.getItem('token');
 
