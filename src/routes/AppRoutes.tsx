@@ -9,7 +9,6 @@ import DashboardLayout from "../pages/dashboard/DashboardLayout";
 import DashboardHome from "../pages/dashboard/DashboardHome";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Perfil from "../pages/dashboard/Perfil";
-import Produtos from "../pages/dashboard/Produtos";
 import ProdutoDetalhe from "../pages/dashboard/ProdutoDetalhe";
 import Carrinho from "../pages/dashboard/Carrinho";
 import AdminRoute from "../components/AdminRoute";
@@ -38,7 +37,6 @@ export default function AppRoutes(){
             }>
                 <Route index element={<DashboardHome/>}/>
                 <Route path="perfil" element={<Perfil/>}/>
-                <Route path="produto" element={<Produtos/>}/>
                 <Route path="produto/:id" element={<ProdutoDetalhe/>}/>
                 <Route path="carrinho" element={<Carrinho/>}/>
             </Route>
