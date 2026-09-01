@@ -17,6 +17,8 @@ import AdminDashboard from "../pages/dashboard/admin/AdminDashboard";
 import AdminMoradores from "../pages/dashboard/admin/AdminMoradores";
 import AdminProdutos from "../pages/dashboard/admin/AdminProdutos";
 import { CarrinhoProvider } from "../context/CarrinhoContext";
+import Cancelado from "../pages/Cancelado";
+import Sucesso from "../pages/Sucesso";
 
 export default function AppRoutes(){
     return(
@@ -40,6 +42,9 @@ export default function AppRoutes(){
                 <Route path="produto/:id" element={<ProdutoDetalhe/>}/>
                 <Route path="carrinho" element={<Carrinho/>}/>
             </Route>
+
+            <Route path="/sucesso" element={<Sucesso/>}/>
+            <Route path="/cancelado" element={<Cancelado/>}/>
 
             <Route path="/admin" element={
                 <AdminRoute>
