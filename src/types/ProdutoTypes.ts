@@ -3,7 +3,7 @@ export interface ProdutoTypes {
     nome: string;
     preco: number;
     descricao: string;
-    categoriaId: string;
+    categoriaId: number | null;
     estoque: number;
     imagem?: string;
     condomminioId: number

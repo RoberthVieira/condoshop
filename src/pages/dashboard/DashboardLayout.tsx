@@ -14,11 +14,9 @@ export default function DashboardLayout() {
     const totalitens = itens.reduce((acc, item) => acc + item.quantidade, 0)
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-50">
-            <header className="md:hidden bg-white shadow-md px-4 py-3 flex justify-between items-center relative z-50">
-                <h3 className="text-xl font-bold text-indigo-700">
-                    Dashboard
-                </h3>
+        <div className="flex flex-col h-screen bg-gray-50">
+            <header className="md:hidden bg-white shadow-md px-4 py-3 flex justify-between items-center relative z-50 shrink-0">
+                <h3 className="text-xl font-bold text-indigo-700">Dashboard</h3>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className="text-gray-700 text-2xl focus:outline-none"
@@ -45,11 +43,6 @@ export default function DashboardLayout() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="produto" className="block text-gray-700 hover:text-indigo-600 transition" onClick={() => setIsOpen(false)}>
-                                        Loja de Produtos
-                                    </Link>
-                                </li>
-                                <li>
                                     <Link to="perfil" className="block text-gray-700 hover:text-indigo-600 transition" onClick={() => setIsOpen(false)}>
                                         Perfil do Usuário
                                     </Link>
@@ -67,18 +60,16 @@ export default function DashboardLayout() {
                             </ul>
                         </nav>
                     </div>
-                    
-                    {/* botão sair fixo no final */}
                     <div className="mt-auto pt-4 border-t border-gray-100">
                         <Button text="Sair" onClick={logout} />
                     </div>
                 </aside>
-            
-                <main className="flex-1 overflow-auto p-4">
+
+                <main className="flex-1 overflow-y-auto">
                     <Outlet/>
+                    <Footer/>
                 </main>
             </div>
-            <Footer/>
         </div>
     )
 }

@@ -15,22 +15,23 @@ export async function loginApi(email: string, senha: string) {
 }
 
 
-export async function getProduto(busca?: string) {
+export async function getProduto(busca?: string, categoriaId?: number, pagina?: number, limite?: number) {
     const token = localStorage.getItem('token')
+    const partes: string[] = []
 
-    const url = busca
-        ? `${API_URL}/produtos?busca=${busca}`
-        : `${API_URL}/produtos`
+    if(busca) partes.push(`busca=${busca}`)
+    if(categoriaId) partes.push(`categoriaId=${categoriaId}`)
+    if(pagina) partes.push(`pagina=${pagina}`)
+    if(limite) partes.push(`limite=${limite}`)
+
+    const query = partes.length > 0 ? `?${partes.join('&')}` : ''
+    const url = `${API_URL}/produtos${query}`
 
     const response = await fetch(url, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
+        headers: { 'Authorization': `Bearer ${token}` }
     })
 
-    if(!response.ok){
-        throw new Error('Erro ao buscar produto')
-    }
+    if(!response.ok) throw new Error('Erro ao buscar produto')
 
     const data = await response.json()
     return data.data
@@ -52,6 +53,20 @@ export async function getProdutoById(id:number) {
 
     const data = await response.json()
     return data.data
+}
+
+export async function getCategoria(){
+    const token =  localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/categoria`, {
+        headers: { 'Authorization':`Bearer ${token}` }
+    })
+
+    if(!response.ok){
+        throw new Error('Erro ao buscar categorias')
+    }
+
+    const data = await response.json();
+    return data.data;
 }
 
 
