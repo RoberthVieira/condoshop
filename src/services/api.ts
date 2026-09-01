@@ -185,12 +185,14 @@ export async function atualizarMorador(id: number, dados: Partial<{
 }
 
 //PAINEL ADMIN - PRODUTOS
-export async function getProdutosAdmin(busca?: string, apenasInativos?: boolean) {
+export async function getProdutosAdmin(busca?: string, apenasInativos?: boolean, pagina?: number, limite?: number) {
     const token = localStorage.getItem('token');
     const partes: string[] = []
 
     if(busca) partes.push(`busca=${busca}`)
     if(apenasInativos) partes.push(`apenasInativos=true`)
+    if(pagina) partes.push(`pagina=${pagina}`)
+    if(limite) partes.push(`limite=${limite}`)
     
     const query = partes.length > 0 ? `?${partes.join('&')}` : ''
     const url = `${API_URL}/produtos${query}`

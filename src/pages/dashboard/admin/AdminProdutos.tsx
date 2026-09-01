@@ -19,16 +19,17 @@ export default function AdminProdutos() {
     const [produtoEdit, setProdutoEdit] = useState<Produto | null>(null);
     const [mostrarForms, setMostrarForms] = useState(false);
     const [mostrarInativos, setMostrarInativos] = useState(false)
+    const [pagina, setPagina] = useState(1)
 
     useEffect(() => {
-        getProdutosAdmin(undefined, mostrarInativos).then(data => {
+        getProdutosAdmin(undefined, mostrarInativos, pagina, 10).then(data => {
             const filtrado = mostrarInativos
                 ? data
                 : data.filter((p: any) => p.ativo === true)
             setProdutos(filtrado)
             setIsLoading(false)
         })
-    }, [mostrarInativos])
+    }, [mostrarInativos, pagina])
 
     if(isLoading === true){
         return (
@@ -54,11 +55,11 @@ export default function AdminProdutos() {
                 <div className="mb-8 flex gap-2">
                     <Button
                         text="Produtos ativos"
-                        onClick={() => setMostrarInativos(false)}
+                        onClick={() => { setMostrarInativos(false); setPagina(1) }}
                     />
                     <Button
                         text="Produtos inativos"
-                        onClick={() => setMostrarInativos(true)}
+                        onClick={() => { setMostrarInativos(true); setPagina(1) }}
                     />
                 </div>
                 <div className="bg-white rounded-xl shadow-sm p-5 mb-6">
@@ -84,7 +85,9 @@ export default function AdminProdutos() {
                                             <button
                                                 onClick={async() => {
                                                     await reativarProduto(produto.id)
-                                                    setProdutos(produtos.filter(p =>  p.id !== produto.id ))
+                                                    const data = await getProdutosAdmin(undefined, mostrarInativos, pagina, 10)
+                                                    const filtrado = mostrarInativos ? data : data.filter((p: any) => p.ativo === true)
+                                                    setProdutos(filtrado)
                                                 }}
                                                 className="text-green-500 hover:text-green-700 transition text-lg"
                                             >
@@ -103,7 +106,9 @@ export default function AdminProdutos() {
                                                         return
                                                     }
                                                     await deletarProduto(produto.id)
-                                                    setProdutos(produtos.filter(p => produto.id  !== p.id))
+                                                    const data = await getProdutosAdmin(undefined, mostrarInativos, pagina, 10)
+                                                    const filtrado = mostrarInativos ? data : data.filter((p: any) => p.ativo === true)
+                                                    setProdutos(filtrado)
                                                 }}
                                                     className="text-red-400 hover:text-red-600 transition text-lg"
                                                 >
@@ -116,6 +121,23 @@ export default function AdminProdutos() {
                             ))}
                         </tbody>
                     </table>
+                    <div className="flex justify-center items-center gap-4 mt-4 mb-2">
+                        <button
+                            onClick={() => setPagina(p => p - 1)}
+                            disabled={pagina === 1}
+                            className="px-4 py-2 rounded-lg bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200 transition disabled:opacity-40 disabled:cursor-not-allowed text-sm"
+                        >
+                            ← Anterior
+                        </button>
+                        <span className="text-gray-500 text-sm">Página {pagina}</span>
+                        <button
+                            onClick={() => setPagina(p => p + 1)}
+                            disabled={produtos.length < 10}
+                            className="px-4 py-2 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition disabled:opacity-40 disabled:cursor-not-allowed text-sm"
+                        >
+                            Próxima →
+                        </button>
+                    </div>
                     <div>
                         {mostrarForms && (
                             <div className="bg-white rounded-xl shadow-sm p-6">
