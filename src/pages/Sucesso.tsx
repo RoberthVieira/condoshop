@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useCarrinho } from "../context/CarrinhoContext";
 
 export default function Sucesso() {
     const navigate = useNavigate();
+    const { limparCarrinho } = useCarrinho();
 
     useEffect(() => {
+        limparCarrinho();
         const timer = setTimeout(() => {
             navigate('/dashboardlayout')
         }, 5000)

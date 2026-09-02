@@ -2,7 +2,7 @@ import { useCarrinho } from "../../context/CarrinhoContext";
 import { criarPedido } from "../../services/api";
 
 export default function Carrinho() {
-    const { itens, removerItem, limparCarrinho } = useCarrinho();
+    const { itens, removerItem} = useCarrinho();
 
     const total = itens.reduce((acc, item) => acc + (item.preco * item.quantidade), 0)
 
@@ -13,7 +13,6 @@ export default function Carrinho() {
                 quantidade: item.quantidade
             }))
         )
-        limparCarrinho();
         window.location.href = data.urlPagamento
     }
 

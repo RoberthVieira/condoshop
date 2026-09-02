@@ -16,7 +16,6 @@ import AdminLayout from "../pages/dashboard/admin/AdminLayout";
 import AdminDashboard from "../pages/dashboard/admin/AdminDashboard";
 import AdminMoradores from "../pages/dashboard/admin/AdminMoradores";
 import AdminProdutos from "../pages/dashboard/admin/AdminProdutos";
-import { CarrinhoProvider } from "../context/CarrinhoContext";
 import Cancelado from "../pages/Cancelado";
 import Sucesso from "../pages/Sucesso";
 
@@ -32,9 +31,7 @@ export default function AppRoutes(){
 
             <Route path="/dashboardlayout" element={
                 <ProtectedRoute>
-                    <CarrinhoProvider>
-                        <DashboardLayout/>
-                    </CarrinhoProvider>
+                    <DashboardLayout/>
                 </ProtectedRoute>
             }>
                 <Route index element={<DashboardHome/>}/>

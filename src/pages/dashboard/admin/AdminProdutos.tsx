@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { atualizarProduto, criarProdutos, deletarProduto, getProdutosAdmin, reativarProduto } from "../../../services/api";
+import { atualizarProduto, criarProdutos, deletarProduto, getProdutosAdmin, reativarProduto, uploadImagemCloudinary } from "../../../services/api";
 import Button from "../../../components/Button";
 
 interface Produto {
@@ -20,6 +20,7 @@ export default function AdminProdutos() {
     const [mostrarForms, setMostrarForms] = useState(false);
     const [mostrarInativos, setMostrarInativos] = useState(false)
     const [pagina, setPagina] = useState(1)
+    const [imagemArquivo, setImagemArquivo] = useState<File | null>(null);
 
     useEffect(() => {
         getProdutosAdmin(undefined, mostrarInativos, pagina, 10).then(data => {
@@ -148,14 +149,19 @@ export default function AdminProdutos() {
                                 <form onSubmit={async(e) => {
                                     e.preventDefault();
                                     const formData  = new FormData(e.currentTarget);
+                                    let urlImagem = produtoEdit?.imagem || undefined
+
+                                    if(imagemArquivo) {
+                                        urlImagem = await uploadImagemCloudinary(imagemArquivo)
+                                    }
 
                                     const dados = {
                                         nome: formData.get('nome') as string,
                                         descricao: formData.get('descricao') as string,
-                                        preco: Number(formData.get('preco')),
+                                        preco: Number((formData.get('preco') as string).replace(',', '.')),
                                         estoque: Number(formData.get('estoque')),
                                         categoriaId: Number(formData.get('categoriaId')),
-                                        imagem: formData.get('imagem') as string || undefined
+                                        imagem: urlImagem
                                     }
 
                                     if(produtoEdit){
@@ -164,6 +170,7 @@ export default function AdminProdutos() {
                                         await criarProdutos(dados)
                                     }
 
+                                    setImagemArquivo(null)
                                     setMostrarForms(false)
                                     setProdutoEdit(null)
                                     const data = await getProdutosAdmin()
@@ -184,7 +191,7 @@ export default function AdminProdutos() {
                                         className="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-indigo-400"
                                     />
                                     <input 
-                                        type="number" 
+                                        type="text" 
                                         name="preco" 
                                         defaultValue={produtoEdit?.preco || ''} 
                                         placeholder="Preço"
@@ -205,12 +212,17 @@ export default function AdminProdutos() {
                                         className="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-indigo-400"
                                     />
                                     <input 
-                                        type="text" 
+                                        type="file" 
+                                        accept="image/*"
                                         name="imagem" 
+                                        onChange={(e) => setImagemArquivo(e.target.files?.[0] || null)}
                                         defaultValue={produtoEdit?.imagem || ''} 
                                         placeholder="URL da imagem (opcional)"
                                         className="border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-indigo-400"
                                     />
+                                    {produtoEdit?.imagem && !imagemArquivo && (
+                                        <p className="text-xs text-gray-400">Imagem atual: <a href={produtoEdit.imagem} target="_blank" className="text-indigo-500 underline">ver imagem</a></p>
+                                    )}
                                     <div className="flex gap-3">
                                         <button type="submit" className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">
                                             Salvar
