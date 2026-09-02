@@ -1,117 +1,95 @@
-# 🏬 CondoShop
+# CondoShop 🛒
 
-**CondoShop** é uma aplicação web fictícia de e-commerce desenvolvida com **React + TypeScript**. 
-O projeto foi criado com o objetivo de treinar conceitos fundamentais de **componentização**, **navegação entre rotas**, **hooks personalizados**, **validação de formulários com Zod**, **React Hook Form** e **estilização responsiva com TailwindCSS**.
+Frontend do **CondoShop** — um e-commerce para mercadinhos de condomínio. Projeto desenvolvido como forma de aprendizado de integração frontend com uma API REST real.
 
----
+## 🚀 Tecnologias
 
-## 🚀 Tecnologias utilizadas
+- **React 18** + **TypeScript** — UI e tipagem estática
+- **Vite** — bundler e dev server
+- **React Router DOM** — roteamento client-side
+- **Tailwind CSS** — estilização utility-first
+- **React Hook Form** + **Zod** — formulários com validação
+- **Stripe** — redirecionamento para checkout
+- **Cloudinary** — upload de imagens direto do browser
 
--  **React (Vite + TypeScript)** — estrutura base do projeto  
--  **React Router DOM** — gerenciamento de rotas e navegação  
--  **TailwindCSS** — estilização moderna, responsiva e consistente  
--  **React Hook Form** — gerenciamento de formulários  
--  **Zod** — validação de dados integrada aos formulários  
--  **Hooks personalizados**:
-  - `useAuth`: gerencia autenticação e informações do usuário  
-  - `useBuscaProdutos`: gerencia a busca e filtragem de produtos 
+## 📁 Estrutura do projeto
+src/
+├── components/ # Componentes reutilizáveis (Button, Input, CardProduto...)
+├── context/ # CarrinhoContext — estado global do carrinho
+├── hooks/ # useAuth, useBuscaProdutos
+├── layouts/ # HomeLayout, DashboardLayout
+├── pages/
+│ ├── dashboard/ # Páginas do morador (Home, Perfil, Carrinho, ProdutoDetalhe)
+│ │ └── admin/ # Painel admin (Dashboard, Produtos, Moradores)
+│ ├── Home.tsx
+│ ├── Login.tsx
+│ ├── About.tsx
+│ ├── Sucesso.tsx
+│ └── Cancelado.tsx
+├── routes/ # AppRoutes.tsx — definição de todas as rotas
+├── services/ # api.ts — todas as chamadas à API
+├── types/ # Interfaces TypeScript
+└── style/ # CSS global (Tailwind)
 
----
+## 🔐 Autenticação e Rotas Protegidas
 
-## 🎯 Objetivo do projeto
+- Login salva o **token JWT** e dados do morador no `localStorage`
+- `ProtectedRoute` bloqueia acesso de não autenticados
+- `AdminRoute` bloqueia acesso de não admins
+- Hook `useAuth` expõe `login`, `logout` e `getMorador`
 
-O **CondoShop** foi desenvolvido como uma **simulação de loja virtual**, com foco em **boas práticas de desenvolvimento front-end**.  
-Mais do que um simples layout, o projeto explora:
+## 📦 Funcionalidades
 
--  Estruturação e organização de pastas e componentes;  
--  Criação de **componentes reutilizáveis e estilizados**;  
--  Implementação de **rotas dinâmicas** (ex: página de detalhes de produto);  
--  **Autenticação simulada** com controle de sessão;  
--  Lógicas encapsuladas em **hooks personalizados**;  
--  **Formulários tipados e validados** com React Hook Form + Zod.
+### Área do Morador
+- Vitrine de produtos com busca, filtro por categoria e paginação
+- Carrinho com adição, remoção e finalização via Stripe
+- Perfil com resumo de compras e histórico de pedidos expansível
+- Detalhe do produto com imagem, descrição, preço e estoque
+- Página de sucesso/cancelamento após pagamento
 
----
+### Painel Admin
+- Dashboard com métricas em tempo real
+- Gestão de produtos: criar, editar, desativar e reativar
+- Upload de imagens direto pro Cloudinary
+- Paginação na listagem de produtos
+- Gestão de moradores: criar, editar e deletar
 
-## 📱 Responsividade
+## ⚙️ Como rodar localmente
 
-O design foi construído com **TailwindCSS**, garantindo:
-
-- Layout fluido e adaptável a diferentes dispositivos;  
-- Espaçamentos e tipografias consistentes;  
-- Interface moderna tanto no **modo desktop** quanto **mobile**.
-
----
-
-## 🧩 Estrutura de componentes
-
-Alguns dos principais componentes e páginas:
-
-| Tipo | Nome | Descrição |
-|------|------|------------|
-|  **Componente** | `NavBar` | Barra de navegação principal |
-|  **Componente** | `CardProdutos` | Exibe informações de cada produto |
-|  **Página** | `ProdutoDetalhe` | Página de detalhes e compra |
-|  **Página** | `Dashboard` | Painel principal de produtos |
-|  **Página** | `Perfil` | Perfil do usuário autenticado |
-|  **Página** | `Login` | Formulário com validação (Zod + React Hook Form) |
-
----
-
-## 🧠 Conceitos praticados
-
--  React com TypeScript (tipagem e props seguras)  
--  Composição e reutilização de componentes  
--  Criação e uso de hooks personalizados  
--  Navegação entre páginas com React Router DOM  
--  Validação de formulários com Zod  
--  Estilização e responsividade com TailwindCSS  
--  Boas práticas de organização e legibilidade de código 
-
----
-
-## 🧪 Próximos passos
-
--  Implementar **integração com backend (API REST)**  
--  Adicionar **persistência de autenticação** via contexto global  
--  Criar **testes automatizados** com Jest + React Testing Library  
--  Implementar **carrinho de compras** e **histórico de pedidos**
-
----
-
-## ⚙️ Como executar o projeto
-
-```
-
-Clone o repositório:
-git clone https://github.com/RoberthVieira/condoshop.git
-
-Acesse a pasta do projeto:
+```bash
+git clone https://github.com/RoberthVieira/condoshop
 cd condoshop
-
-Instale as dependências:
 npm install
-
-Execute o servidor de desenvolvimento
 npm run dev
-
 ```
---- 
 
-## 🧾 Licença
+A aplicação estará disponível em `http://localhost:5173`.
 
-Este projeto foi desenvolvido apenas para fins de estudo e demonstração de habilidades técnicas.
-Sinta-se à vontade para explorar
+## 🛣️ Rotas da aplicação
 
----
+| Rota | Página | Acesso |
+|------|--------|--------|
+| `/` | Home pública | Todos |
+| `/about` | Sobre | Todos |
+| `/login` | Login | Todos |
+| `/dashboardlayout` | Vitrine de produtos | Morador |
+| `/dashboardlayout/perfil` | Perfil e histórico | Morador |
+| `/dashboardlayout/produto/:id` | Detalhe do produto | Morador |
+| `/dashboardlayout/carrinho` | Carrinho | Morador |
+| `/sucesso` | Confirmação de compra | Todos |
+| `/cancelado` | Pagamento cancelado | Todos |
+| `/admin` | Dashboard admin | Admin |
+| `/admin/produtos` | Gestão de produtos | Admin |
+| `/admin/moradores` | Gestão de moradores | Admin |
 
-## 👨‍💻 Autor
+## 💡 Conceitos praticados
 
-- Roberth Vieira 
-- 💼 Desenvolvedor Front-End
-- 📧 roberthvieiracv@gmail.com
-- 🌐 linkedin.com/in/roberth-vieira-501490211/
-- 💻 github.com/RoberthVieira
-
----
-
-**Demo:** https://condoshop.vercel.app/
+- Componentização e reutilização no React
+- Roteamento com React Router DOM (layouts aninhados, rotas protegidas)
+- Context API para estado global (carrinho)
+- Hooks customizados (useAuth, useBuscaProdutos)
+- Integração com API REST (fetch, autenticação via header)
+- Formulários com React Hook Form + Zod
+- Upload de arquivos para serviço externo (Cloudinary)
+- Paginação e filtros reativos
+- Responsividade com Tailwind CSS
