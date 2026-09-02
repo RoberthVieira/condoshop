@@ -13,6 +13,7 @@ Frontend do **CondoShop** — um e-commerce para mercadinhos de condomínio. Pro
 - **Cloudinary** — upload de imagens direto do browser
 
 ## 📁 Estrutura do projeto
+```
 src/
 ├── components/ # Componentes reutilizáveis (Button, Input, CardProduto...)
 ├── context/ # CarrinhoContext — estado global do carrinho
@@ -30,6 +31,7 @@ src/
 ├── services/ # api.ts — todas as chamadas à API
 ├── types/ # Interfaces TypeScript
 └── style/ # CSS global (Tailwind)
+```
 
 ## 🔐 Autenticação e Rotas Protegidas
 
