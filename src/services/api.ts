@@ -274,3 +274,23 @@ export async function reativarProduto(id: number) {
 
     if(!response.ok) throw new Error('Erro ao reativar produto')
 }
+
+//UPLOAD IMAGEM
+export async function uploadImagemCloudinary(arquivo: File): Promise<string> {
+    const formData = new FormData()
+    formData.append('file', arquivo)
+    formData.append('upload_preset', 'condoshop_produtos')
+
+    const response = await fetch(
+        'https://api.cloudinary.com/v1_1/d98ovx7h/image/upload',
+        {
+            method: 'POST',
+            body: formData
+        }
+    )
+
+    if(!response.ok) throw new Error('Erro ao fazer upload da imagem')
+
+    const data = await response.json()
+    return data.secure_url
+}
