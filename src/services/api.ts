@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3333';
+const API_URL = 'https://condoshop-api.onrender.com';
 
 export async function loginApi(email: string, senha: string) {
     const response = await fetch(`${API_URL}/auth/login`, {
